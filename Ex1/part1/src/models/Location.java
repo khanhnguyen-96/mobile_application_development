@@ -3,39 +3,43 @@ package models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by nnkti on 3/6/2018.
  */
 public class Location {
     @SerializedName("lat")
     @Expose
-    private Double lat;
+    private double lat;
     @SerializedName("lng")
     @Expose
-    private Double lng;
+    private double lng;
 
-    public Location(Double lat, Double lng) {
+    public Location(double lat, double lng) {
         this.lat = lat;
         this.lng = lng;
     }
 
-    public Double getLat() {
+    public double getLat() {
         return lat;
     }
 
-    public void setLat(Double lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
 
-    public Double getLng() {
+    public double getLng() {
         return lng;
     }
 
-    public void setLng(Double lng) {
+    public void setLng(double lng) {
         this.lng = lng;
     }
 
     @Override public String toString() {
-        return String.format("%.1f,%.1f", lat, lng);
+        DecimalFormat df = new DecimalFormat("#.######");
+
+        return df.format(lat) + "," + df.format(lng);
     }
 }

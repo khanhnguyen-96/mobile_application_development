@@ -38,23 +38,13 @@ public class GetLocationInfoByLatlngPresenter {
     public void getInfoByLatlng(Location location) {
         System.out.println("... Retrieving info from Google Maps");
         Call<GeocodingModel> call = apiService.getGeoByLatlng(location, Const.MY_API_KEY);
-        System.out.println("Ket qua: ");
+        System.out.println("Result: ");
         call.enqueue(new Callback<GeocodingModel>() {
             @Override
             public void onResponse(Call<GeocodingModel> call, Response<GeocodingModel> response) {
                 if (response.body().getStatus().equals("OK")) {
-                    boolean found = false;
                     for (Result item : response.body().getResults()) {
-                        if (found) {
-                            break;
-                        }
-                        for (String type : item.getTypes()) {
-                            if (type.equals("street_address")) {
-                                System.out.println(item.getFormattedAddress());
-                                found = true;
-                                break;
-                            }
-                        }
+                        System.out.println(item.getFormattedAddress());
                     }
                 } else {
                     System.out.println("No results");
